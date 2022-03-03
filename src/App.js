@@ -60,7 +60,7 @@ function App() {
           
         }
         
-        document.getElementById("output").innerHTML = `Linked Discord ID ${user.id} (TODO: Have Username Here) to Wallet Address ${Address}`
+        document.getElementById("output").innerHTML = `Linked ${user.username}#${user.discriminator}'s Discord ID (${user.id}) to Wallet Address ${Address}`
         
     
     } catch (error) {
