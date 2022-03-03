@@ -1,13 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-//const {token} = require('./config/config.json')
-//const discord = require('discord.js')
-//const client = new discord.Client()
 const ethers = require('ethers')
-
-//client.login(token)
-
-  
 
 
 function App() {
