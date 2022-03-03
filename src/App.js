@@ -26,7 +26,6 @@ function App() {
 
         const { ethereum } = window
         const signer = new ethers.providers.Web3Provider(ethereum, 'any').getSigner()
-        //const Inflection = new ethers.Contract(InflectionAddress, abi, signer)
         const Address = (await ethereum.request({ method: "eth_requestAccounts" }))[0]
         const user = await fetch('https://discord.com/api/users/@me', {
           headers: {
@@ -61,8 +60,7 @@ function App() {
           
         }
         
-        //await Inflection.authenticate(user.id, Address)
-        document.getElementById("output").innerHTML = `Linked Discord ID ${user.id} () to Wallet Address ${Address}`
+        document.getElementById("output").innerHTML = `Linked Discord ID ${user.id} (TODO: Have Username Here) to Wallet Address ${Address}`
         
     
     } catch (error) {
