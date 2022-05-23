@@ -35,7 +35,7 @@ function App() {
         try {
           await ethereum.request({
             method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x4' }],
+            params: [{ chainId: '0x13881' }],
           });
           
         } catch (switchError) {
@@ -64,8 +64,8 @@ function App() {
 
   return (
     <div className="App">
-
-      <h3>Tavern Keeper Authentication</h3>
+      <img src={require('./Authentication.png')}></img>
+      <h3 color='white' >Valu Authentication</h3>
       <button onClick= {connectWallet} id='button'>Authenticate</button>
       <p id="output"></p>
 
