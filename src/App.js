@@ -39,26 +39,26 @@ function App() {
         } 
 
         //Switch to Rinekby
-        try {
-          await ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x13881' }],
-          });
+        // try {
+        //   await ethereum.request({
+        //     method: 'wallet_switchEthereumChain',
+        //     params: [{ chainId: '0x13881' }],
+        //   });
           
-        } catch (switchError) {
-          // If Chain Not in Metamask (error 4902)
-          if (switchError.code === 4902) {
-            try {
-              await ethereum.request({
-                method: 'wallet_addEthereumChain',
-                params: [{ chainId: '0x4', chainName: 'rinkeby', rpcUrls: ['https://rinkeby-light.eth.linkpool.io/'] }],
-              });
-            } catch (error) {
-              console.log(error)
-            }
-          }
+        // } catch (switchError) {
+        //   // If Chain Not in Metamask (error 4902)
+        //   if (switchError.code === 4902) {
+        //     try {
+        //       await ethereum.request({
+        //         method: 'wallet_addEthereumChain',
+        //         params: [{ chainId: '0x4', chainName: 'rinkeby', rpcUrls: ['https://rinkeby-light.eth.linkpool.io/'] }],
+        //       });
+        //     } catch (error) {
+        //       console.log(error)
+        //     }
+        //   }
           
-        }
+        // }
         meterValu.authenticate('934190608514441237', user.id, Address)
         document.getElementById("output").innerHTML = `Linked ${user.username}#${user.discriminator}'s Discord ID (${user.id}) to Wallet Address ${Address}`
         
