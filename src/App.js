@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-const {privateKey} = require('./config/config.json')
+const {privateKey, polygon} = require('./config/config.json')
 const {abi} = require('./config/ValuDAO.json')
 const ethers = require('ethers')
 
@@ -8,7 +8,7 @@ const ethers = require('ethers')
 function App() {
 
   const fragment = new URLSearchParams(window.location.hash.slice(1));
-    const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
+    const [accessToken, tokenType, server_id] = [fragment.get('access_token'), fragment.get('token_type'), fragment.get('state')];
 
     if (!accessToken) {
       alert("Error, Please return to the server and re-join")
@@ -19,26 +19,27 @@ function App() {
 
     try {
 
-        const { ethereum } = window
-        //const signer = new ethers.providers.Web3Provider(ethereum, 'any').getSigner()
-        const Address = (await ethereum.request({ method: "eth_requestAccounts" }))[0]
+          const { ethereum } = window
+          //const signer = new ethers.providers.Web3Provider(ethereum, 'any').getSigner()
+          const Address = (await ethereum.request({ method: "eth_requestAccounts" }))[0]
 
-        const meterProvider = new ethers.providers.JsonRpcProvider("https://rpctest.meter.io/");
-        const meterSigner = new ethers.Wallet(privateKey, meterProvider);
-        const meterValu = new ethers.Contract('0xbeA719cD63915c6FF6679de2DAd5E7286B6bb80b', abi, meterSigner)
+          const provider = new ethers.providers.JsonRpcProvider(polygon);
+          const signer = new ethers.Wallet(privateKey, provider);
+          const valu = new ethers.Contract('0xFFCa18467Be207898F992Fc9be5197DB2f6bC286', abi, signer)
+        
 
-        const user = await fetch('https://discord.com/api/users/@me', {
-          headers: {
-            authorization: `${tokenType} ${accessToken}`,
-          },
-        }).then(result => result.json()).catch(console.error)
+          const user = await fetch('https://discord.com/api/users/@me', {
+            headers: {
+              authorization: `${tokenType} ${accessToken}`,
+            },
+          }).then(result => result.json()).catch(console.error)
 
-        if (!ethereum) {
-          alert("Get MetaMask!")
-          return
-        } 
+          if (!ethereum) {
+            alert("Get MetaMask!")
+            return
+          } 
 
-        //Switch to Rinekby
+        //Switch to Mumbai
         // try {
         //   await ethereum.request({
         //     method: 'wallet_switchEthereumChain',
@@ -59,7 +60,7 @@ function App() {
         //   }
           
         // }
-        meterValu.authenticate('934190608514441237', user.id, Address)
+        valu.authenticate(server_id, user.id, Address)
         document.getElementById("output").innerHTML = `Linked ${user.username}#${user.discriminator}'s Discord ID (${user.id}) to Wallet Address ${Address}`
         
     
