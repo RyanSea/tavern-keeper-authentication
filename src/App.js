@@ -60,8 +60,8 @@ function App() {
           }
           
         }
-        console.log(server_id)
-        valu.authenticate(server_id, user.id, Address)
+        
+        await valu.authenticate(server_id, user.id, Address)
         document.getElementById("output").innerHTML = `Linked ${user.username}#${user.discriminator}'s Discord ID (${user.id}) to Wallet Address ${Address}`
         
     
