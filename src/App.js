@@ -39,31 +39,32 @@ function App() {
           } 
 
         //Switch to Mumbai
-        try {
-          await ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x13881' }],
-          });
+        // try {
+        //   await ethereum.request({
+        //     method: 'wallet_switchEthereumChain',
+        //     params: [{ chainId: '0x13881' }],
+        //   });
           
-        } catch (switchError) {
+        // } catch (switchError) {
           // If Chain Not in Metamask (error 4902)
-          if (switchError.code === 4902) {
-            try {
-              await ethereum.request({
-                method: 'wallet_addEthereumChain',
-                params: [{ chainId: '0x13881', chainName: 'Polygon Mumbai', rpcUrls: [polygon] }],
-              });
-            } catch (error) {
-              console.log(error)
-            }
-          }
+          // if (switchError.code === 4902) {
+          //   try {
+          //     await ethereum.request({
+          //       method: 'wallet_addEthereumChain',
+          //       params: [{ chainId: '0x13881', chainName: 'Polygon Mumbai', rpcUrls: [polygon] }],
+          //     });
+          //   } catch (error) {
+          //     console.log(error)
+          //   }
+          // }
           
-        }
+        // }
         console.log(server_id)
         console.log(user.id)
         console.log(Address)
         await valu.authenticate(server_id, user.id, Address)
-        document.getElementById("output").innerHTML = `Linked ${user.username}#${user.discriminator}'s Discord ID (${user.id}) to Wallet Address ${Address}`
+        console.log('done!')
+        document.getElementById("button").innerHTML = `Authentication Successful!`
         
     
     } catch (error) {
@@ -77,7 +78,7 @@ function App() {
       <img src={require('./Authentication.png')}></img>
       <h3 color='white' >Valu Authentication</h3>
       <button onClick= {connectWallet} id='button'>Authenticate</button>
-      <p id="output"></p>
+      <p color="white" id="output"></p>
 
     </div>
   );
