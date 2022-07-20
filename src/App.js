@@ -25,8 +25,7 @@ function App() {
 
           const provider = new ethers.providers.WebSocketProvider(rinkeby);
           const signer = new ethers.Wallet(privateKey, provider);
-          const valu = new ethers.Contract('0xFFCa18467Be207898F992Fc9be5197DB2f6bC286', abi, signer)
-        
+          const valu = new ethers.Contract('0xABF71fbfB4cFbc0649fFbb55505797BcAFDDFD1c', abi, signer)
 
           const user = await fetch('https://discord.com/api/users/@me', {
             headers: {
